@@ -4,6 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+/.css
+/.img
+/.js
+/.scss
+/.vendor
 
 # testing
 /coverage
