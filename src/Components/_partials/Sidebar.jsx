@@ -36,9 +36,10 @@ export default class Sidebar extends Component {
 
                 {/* Nav Item - Dashboard */}
                 <li className="nav-item">
-                    <a className="nav-link" >
+                    <NavLink className="nav-link" to="/about">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
-                        <span>About</span></a>
+                        <span>About</span>
+                    </NavLink>
                 </li>
                 <hr className="sidebar-divider" />
 
@@ -50,7 +51,7 @@ export default class Sidebar extends Component {
                     </a>
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
-                        <a className="collapse-item" >Category </a>
+                            <NavLink className="collapse-item" to="/category" >Category </NavLink>
                             <a className="collapse-item" href="cards.html">Cards</a>
                         </div>
                     </div>
