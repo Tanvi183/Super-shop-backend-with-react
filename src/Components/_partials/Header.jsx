@@ -3,8 +3,23 @@ import {Redirect} from 'react-router-dom'
 import ReactDOM from 'react-dom'
 
 export default class Header extends Component {
-    render(){
-        return(
+    
+    constructor(props){
+        super(props);
+    }
+    
+    state = {
+        name:localStorage.getItem('name')
+    }
+
+    logOut = ()=>{
+        localStorage.removeItem('token');
+        window.location.replace('/login');
+    }
+
+    render() {
+        
+        return (
             <>
              <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -177,7 +192,7 @@ export default class Header extends Component {
                     <li className="nav-item dropdown no-arrow">
                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{this.state.name}</span>
                             <img className="img-profile rounded-circle"
                                 src="img/undraw_profile.svg" />
                         </a>

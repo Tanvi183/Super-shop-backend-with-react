@@ -5,7 +5,7 @@ export default class Dashboard extends Component {
         return (
             <>
 
-                <h1> Welcome to Dashboard </h1>
+            <h1> Welcome to Dashboard </h1>
                 
             </>
         )
