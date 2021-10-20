@@ -8,7 +8,9 @@ export default class Category extends Component {
         input:{
             name:'',
             status:1
-        }
+        },
+        process:false,
+        error:''
     }
 
     componentDidMount(){
@@ -18,7 +20,8 @@ export default class Category extends Component {
     getCategory = () =>{
         Api().get('categories').then(res=>{
             this.setState({
-                category:res.data
+                category:res.data,
+                process:false
             })
             // console.log(this.state.category)
         }).catch(err=>{
@@ -31,12 +34,17 @@ export default class Category extends Component {
             input:{
                 ...this.state.input,
                 [event.target.name]:event.target.value
-            }
+            },
+            error:''
         })
     }
 
     submitHandler = (event)=>{
         event.preventDefault();
+
+        this.setState({
+            process:true
+        })
         Api().post('categories',this.state.input).then(res=>{
             this.setState({
                 input:{
@@ -46,6 +54,10 @@ export default class Category extends Component {
             })
             this.getCategory()
         }).catch(err=>{
+            this.setState({
+                process:false,
+                error:'Same Category To be Used!'
+            })
             console.log(err)
         })
     }
@@ -55,8 +67,7 @@ export default class Category extends Component {
             <>
                 <div className="card mb-4">
                     <div className="card-header">
-                    <b>Category</b>
-                    <a className="btn btn-xs btn-success pull-right"><i className="fa fa-plus"></i> Add New</a>
+                        <b>Category</b>
                     </div>
                     <div className="card-body">
 
@@ -66,7 +77,8 @@ export default class Category extends Component {
                                 <div className="col-md-6">
                                     <input type="text" name="name" placeholder="Category Name" value={this.state.input.name} className="form-control" onChange={this.inputHandler} />
                                 </div>
-                                <div className="col-md-2"><button type="submit" className="btn btn-primary">Submit</button></div>
+                                <div className="col-md-2"><button type="submit" className="btn btn-primary">{this.state.process && <i className="fa fa-spinner fa-spin"></i> } Submit</button></div>
+                                {this.state.error && <p className="text-danger text-center"> {this.state.error} </p> }
                             </div>
                             </form>
                         </div>
@@ -88,7 +100,7 @@ export default class Category extends Component {
                                         <td>{i+1}</td>
                                         <td>{data.name}</td>
                                         <td>{data.slug}</td>
-                                        <td> {data.status==1?'Active':'Inactive'} </td>
+                                        <td> {data.status===1?'Active':'Inactive'} </td>
                                         <td></td>
                                     </tr>
                                     )

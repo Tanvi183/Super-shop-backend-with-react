@@ -7,7 +7,7 @@ export default class Sidebar extends Component {
     }
 
     toggleChange = ()=>{
-        if(this.state.toggle==''){
+        if(this.state.toggle===''){
             this.setState({
                 toggle:'toggled'
             })
